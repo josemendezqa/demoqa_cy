@@ -3,28 +3,30 @@ import { InputComponent } from "../../components/input-component";
 
 export class RegistrationPage {
 	constructor() {
+		this.firstNameInput = new InputComponent(
+			'#firstname'
+		)
+		this.lastNameInput = new InputComponent(
+			'#lastname'
+		)
 		this.userNameInput = new InputComponent(
-			'#userName')
+			'#userName'
+		)
 		this.passwordInput = new InputComponent(
 			'#password'
 		)
-		this.loginButton = new ButtonComponent(
-			'#login'
-		)
-		this.newUserButton = new ButtonComponent(
-			'#newUser'
+		this.registerButton = new ButtonComponent(
+			'#register'
 		)
 	
 	}
 
-	login(username, password){
-		this.userNameInput.type(username)
+	registerNewUser(firstName, lastName, userName, password){
+		this.firstNameInput.type(firstName)
+		this.lastNameInput.type(lastName)
+		this.userNameInput.type(userName)
 		this.passwordInput.type(password)
-		this.loginButton.click()
-	}
-
-	navigateToRegister(){
-		this.newUserButton().click()
-	}
-	
+		cy.wait(30000)
+		this.registerButton.click()
+	}	
 }

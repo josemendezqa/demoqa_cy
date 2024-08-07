@@ -1,22 +1,23 @@
 /// <reference types ="Cypress"/>
 
-describe('Registration Suite', () => {
+import { RegistrationPage } from "../pages/registration-page"
+import { StorePage } from "../pages/store-page"
+import { LoginPage } from "../pages/login-page"
+
+const storePage = new StorePage()
+const loginPage = new LoginPage()
+const registrationPage = new RegistrationPage()
+
+describe('Registration Test Suite', () => {
 	beforeEach(() => {
 		cy.clearAllCookies()
 		cy.clearLocalStorage()
+        cy.visit("https://demoqa.com/books")
 	})
 
 	it('should navigate to registration page', () => {
-        cy.visit("https://demoqa.com/register")
-		cy.url().should('eq','https://demoqa.com/register')
-        //cy.visit("https://google.com")
-		//cy.url().should('eq','https://www.google.com/')
-
-        cy.get('#firstname').type('TestName')
-        cy.get('#lastname').type('TestLastName')
-        cy.get('#userName').type('TestUser')
-        cy.get('#password').type('TestPassword')
-        cy.wait(20000)
-        cy.get('#register').click()
+        storePage.navigateToLogin()
+        loginPage.navigateToRegister()
+        registrationPage.registerNewUser("first", "last", 'FL', "123Test!")	
 	})	
 })

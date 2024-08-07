@@ -1,21 +1,27 @@
 /// <reference types ="Cypress"/>
+import { StorePage } from "../pages/store-page"
+import { LoginPage } from "../pages/login-page"
+
+const storePage = new StorePage()
+const loginPage = new LoginPage()
 
 describe('Login Test Suite', () => {
 	beforeEach(() => {
 		cy.clearAllCookies()
 		cy.clearLocalStorage()
+        cy.visit("https://demoqa.com/books")
+
 	})
 
-	it('should navigate to registration page', () => {
-        cy.visit("https://demoqa.com/register")
-		cy.url().should('eq','https://demoqa.com/register')
-   
+	it('should successfully login when valid credentials are entered', () => {   
+        storePage.navigateToLogin()
+        loginPage.login("joseqa", "123Test!")
 
-        cy.get('#firstname').type('TestName')
-        cy.get('#lastname').type('TestLastName')
-        cy.get('#userName').type('TestUser')
-        cy.get('#password').type('TestPassword')
-        cy.wait(20000)
-        cy.get('#register').click()
+	})	
+
+    it('should display error when invalid credentials are entered', () => {   
+        storePage.navigateToLogin()
+        loginPage.login("joseqa", "wrongPassword!")
+        loginPage.invalidCredentialsMessageIsDisplayed()
 	})	
 })
