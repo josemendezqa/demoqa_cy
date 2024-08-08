@@ -1,7 +1,6 @@
 import { UsersEndpointsConstants } from "../constants/users-endpoints-constants";
 import createUserRequestBody from '../../../../../fixtures/api/users/requestsBody/user-create-body.json'
 
-
 export class UsersApiHelper {
     createUser(){
         const requestBody = createUserRequestBody        

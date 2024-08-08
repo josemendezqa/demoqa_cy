@@ -1,22 +1,23 @@
 import { ButtonComponent } from "../../components/button-component";
 import { InputComponent } from "../../components/input-component";
 import { LabelComponent } from "../../components/label-component";
+import { LoginPageLocators } from "./locators/login-page-locators";
 
 export class LoginPage {
 	constructor() {
 		this.userNameInput = new InputComponent(
-			'#userName')
+			LoginPageLocators.USERNAME_INPUT)
 		this.passwordInput = new InputComponent(
-			'#password'
+			LoginPageLocators.PASSWORD_INPUT
 		)
 		this.loginButton = new ButtonComponent(
-			'#login'
+			LoginPageLocators.LOGIN_BUTTON
 		)
 		this.newUserButton = new ButtonComponent(
-			'#newUser'
+			LoginPageLocators.NEW_USER_BUTTON
 		)
 		this.invalidCredentialsLabel = new LabelComponent(
-			'#name'
+			LoginPageLocators.INVALID_CREDENTIALS_LABEL
 		)	
 	}
 

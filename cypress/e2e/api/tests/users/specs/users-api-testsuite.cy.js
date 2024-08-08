@@ -15,12 +15,11 @@ describe('Users API Test Suite', () => {
             validator.http201Validations(createUserResponse)            
         })
     })
-
     
     it('Should retrieve users', {}, () => {
         usersApiHelper.getUsers().then((getUsersResponse)=> {
             console.log(getUsersResponse)
             validator.http200Validations(getUsersResponse)     
-    })
+        })
     })
 })

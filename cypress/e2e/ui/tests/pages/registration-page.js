@@ -1,24 +1,28 @@
 import { ButtonComponent } from "../../components/button-component";
 import { InputComponent } from "../../components/input-component";
+import { LabelComponent } from "../../components/label-component";
+import { RegistrationPageLocators } from "./locators/registration-page-locators";
 
 export class RegistrationPage {
 	constructor() {
 		this.firstNameInput = new InputComponent(
-			'#firstname'
+			RegistrationPageLocators.FIRSTNAME_INPUT
 		)
 		this.lastNameInput = new InputComponent(
-			'#lastname'
+			RegistrationPageLocators.LASTNAME_INPUT
 		)
 		this.userNameInput = new InputComponent(
-			'#userName'
+			RegistrationPageLocators.USERNAME_INPUT
 		)
 		this.passwordInput = new InputComponent(
-			'#password'
+			RegistrationPageLocators.PASSWORD_INPUT
 		)
 		this.registerButton = new ButtonComponent(
-			'#register'
+			RegistrationPageLocators.REGISTER_BUTTON
 		)
-	
+		this.passwordErrorLabel = new LabelComponent(
+			RegistrationPageLocators.PASSWORD_ERROR_LABEL
+		)	
 	}
 
 	registerNewUser(firstName, lastName, userName, password){
@@ -29,4 +33,9 @@ export class RegistrationPage {
 		cy.wait(30000)
 		this.registerButton.click()
 	}	
+
+	validateIncorrectRegistrationData(){
+		this.passwordErrorLabel.containsText(
+			"Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer.")		
+	}
 }

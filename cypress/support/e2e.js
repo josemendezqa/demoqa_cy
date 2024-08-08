@@ -20,10 +20,10 @@ import './commands'
 // require('./commands')
 
 Cypress.on('uncaught:exception', (err, runnable) => {
-    // Ignora los errores de scripts de origen cruzado
+    // Ignore cross-origin errors
     if (err.message.includes('Script error.')) {
       return false
     }
-    // Permitir que Cypress falle la prueba para otros errores no manejados
+    // Allow Cypress to fail test for other unhandled errors
     return true
   })
