@@ -7,9 +7,13 @@
     "cy:dev-open": "cypress open --env envSelected=dev",
     "cy:local-open": "cypress open --env envSelected=local",
     "cy:stg-report": "cypress run --spec cypress/e2e/tests/**/specs/**.cy.js --env envSelected=staging --browser chrome --headless",
-    "cy:run:stg:firefox": "cypress run --env configFile=staging --browser firefox",
-    "cy:run:stg:chrome": "cypress run --env configFile=staging --browser chrome",
-    "cy:run:stg:edge": "cypress run --env configFile=staging --browser edge"
+    "cy:run:stg:firefox": "cypress run --env envSelected=staging --browser firefox",
+    "cy:run:stg:chrome": "cypress run --env envSelected=staging --browser chrome",
+    "cy:run:stg:edge": "cypress run --env envSelected=staging --browser edge",
+    "cy:merge-reports": "mochawesome-merge cypress/reports/*.json > cypress/reports/report.json",
+    "cy:generate-report": "mochawesome-report-generator cypress/reports/report.json",
+    "cy:run:stg:chrome:report": "npm run cy:run:stg:chrome && npm run cy:merge-reports && npm run cy:generate-report"
+
   },
   "devDependencies": {
     "cypress": "^13.13.2",

@@ -16,6 +16,7 @@ Project Github repository: https://github.com/josemendezqa/demoqa_cy
   - [Run in Headless Mode](#run-in-headless-mode)
   - [Generating Reports](#generating-reports)
 - [Project Structure](#project-structure)
+- [Environment configuration](#environment-configuration)
 - [Libraries Used](#libraries-used)
 - [License](#license)
 - [Contact Info](#contact-info)
@@ -89,6 +90,28 @@ To generate and view test reports, follow these steps:
     cypress.config.js: Main configuration file for Cypress.
     package.json: npm configuration file, including scripts and dependencies.
     README.md: This file.
+
+## Environment Configuration
+
+This project is set up to run tests in different environments (e.g., development, staging, production). Each environment has its own configuration file located in the cypress/config directory.
+Available Environments
+
+  Development (dev.json)
+  Local (local.json)
+  Staging (staging.json)
+
+Switching Environments
+To run tests in a specific environment, set the CYPRESS_ENV environment variable before running the tests. For example:
+  Development:
+    CYPRESS_ENV=dev npx cypress run
+  Local:
+    CYPRESS_ENV=local npx cypress run
+  Staging:
+    CYPRESS_ENV=staging npx cypress run
+
+How It Works
+    The environment-handler.js file dynamically loads the appropriate environment configuration based on the value of CYPRESS_ENV.
+    If no environment is specified, it defaults to staging.
 
 ## Libraries Used
 

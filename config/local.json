@@ -1,5 +1,6 @@
 {
-	"user": "jqa",
-	"password": "123Test!",
-	"url": "https://demoblaze.com/"
-}
+	"user": "localUser",
+	"password": "localPassword!",
+	"url": "https://demoqa.com",
+	"apiUrl": "https://reqres.in/api"
+  }
