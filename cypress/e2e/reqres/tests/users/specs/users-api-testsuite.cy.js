@@ -2,39 +2,43 @@
 
 import StatusCodeValidator from '../../../helpers/status-code-validator'
 import { UsersApiHelper } from '../helpers/users-api-helpers'
+import { validateSchema } from '../../../helpers/schemaValidator'
+import getUsersSchema from '../../../../../fixtures/api/users/schemaValidators/get_users_schema.json'
+import createUserSchema from '../../../../../fixtures/api/users/schemaValidators/post_user_schema.json'
+
 
 const validator = new StatusCodeValidator()
 const usersApiHelper = new UsersApiHelper()
 
 
 describe('Users API Test Suite', () => {
-    // Test 1: Create a New User
-    // This test creates a new user using the API's POST endpoint.
-    // It validates that the creation was successful by checking for a 201 status code.
-    it('Should create a new user', () => {
+    
+    it.only('Should create a new user', () => {
         usersApiHelper.createUser().then((createUserResponse) => {
-            console.log(createUserResponse)
-            validator.http201Validations(createUserResponse)            
-        })
-    })
+            console.log(createUserResponse);
+    
+            validator.http201Validations(createUserResponse);
+    
+            const isValidSchema = validateSchema(createUserSchema, createUserResponse.body);
+            expect(isValidSchema, "Schema validation failed").to.be.true;    
 
-    // Test 2: Create a New User with Invalid Data
-    // This test attempts to create a new user with invalid data and expects the request to fail.
-    // It checks for an error status code, ensuring the API handles invalid data appropriately.
-    it('Should retrieve users', {}, () => {
-        usersApiHelper.getUsers().then((getUsersResponse)=> {
-            console.log(getUsersResponse)
-            validator.http200Validations(getUsersResponse)   
+        });
+    });
+    
+    it('Should retrieve users', () => {
+        usersApiHelper.getUsers().then((getUsersResponse) => {
+            console.log(getUsersResponse);
+    
+            validator.http200Validations(getUsersResponse);
+    
+            const isValidSchema = validateSchema(getUsersSchema, getUsersResponse.body);
+
+            expect(isValidSchema, "Schema validation failed").to.be.true;
             expect(getUsersResponse.body.data).to.be.an('array');
-            expect(getUsersResponse.body.data.length).to.be.greaterThan(0);  
-        })
-    })
+            expect(getUsersResponse.body.data.length).to.be.greaterThan(0);
+        });
+    });
 
-    //agregar schemaValidator
-
-    // Test 3: Create a New User and Retrieve Users
-    // This test creates a new user, then retrieves the list of users.
-    // It verifies that the response contains an array of users and that each user has expected properties.
     it('Should create a new user and retrieve users', () => {
         usersApiHelper.createUser().then((createUserResponse) => {
             

@@ -1,4 +1,4 @@
-import ApiCalls from "../e2e/Reqres/helpers/api-calls"
+import ApiCalls from "../e2e/reqres/helpers/api-calls"
 
 const apiCalls = new ApiCalls()
 
