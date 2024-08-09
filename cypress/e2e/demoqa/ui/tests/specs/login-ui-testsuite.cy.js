@@ -18,7 +18,7 @@ describe('Login Test Suite', () => {
 
 	})
 
-        it.only('should create a new USER by API and login by UI', () => {   
+        it('should create a new USER by API and login by UI', () => {   
                 usersApiHelper.createUserByAPI().then((response) => {
                     // Imprime el status y el body de la respuesta para debugging
                     console.log("Status: " + response.status);
@@ -36,20 +36,10 @@ describe('Login Test Suite', () => {
                     loginPage.login(userData.userName, userData.password);                 
                 });
             });
-            
-
-
-	it('should successfully login when valid credentials are entered', () => {   
- //             UsersApiHelper.createuser()=?{}
-                storePage.navigateToLogin()
-                loginPage.login(userData.userName, userData.password)
-                //profilePage.isUserNameValueCorrect(userData.userName)
-
-	})	
 
         it('should display error when invalid credentials are entered', () => {   
                 storePage.navigateToLogin()
                 loginPage.login(userData.userName, "wrongPassword!")
                 loginPage.invalidCredentialsMessageIsDisplayed()
-	})	
+    	})	
 })

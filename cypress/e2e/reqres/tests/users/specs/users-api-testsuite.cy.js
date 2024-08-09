@@ -13,7 +13,7 @@ const usersApiHelper = new UsersApiHelper()
 
 describe('Users API Test Suite', () => {
     
-    it.only('Should create a new user', () => {
+    it('Should create a new user', () => {
         usersApiHelper.createUser().then((createUserResponse) => {
             console.log(createUserResponse);
     

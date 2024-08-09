@@ -14,7 +14,6 @@ describe('Search Test Suite', () => {
 
 	it('should search by book title', () => {		
         storePage.runSearch(bookData.title)
-		//validations
 	})
 
 	it('should search by author name', () => {		
