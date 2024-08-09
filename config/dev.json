@@ -1,4 +1,7 @@
 {
-	"user": "Admin",
-	"url": "https://demoqa.com/register"
-}
+	"user": "devUser",
+	"password": "devPassword!",
+	"url": "https://demoqa.com",
+	"apiUrl": "https://reqres.in/api"
+  }
+  

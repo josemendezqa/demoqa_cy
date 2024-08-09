@@ -1,5 +1,6 @@
 {
-	"user": "admin",
-	"password": "admin",
-	"url": "http://the-internet.herokuapp.com/"
-}
+	"user": "stagingUser",
+	"password": "stagingPassword!",
+	"url": "https://demoqa.com",
+	"apiUrl": "https://reqres.in/api"
+  }
