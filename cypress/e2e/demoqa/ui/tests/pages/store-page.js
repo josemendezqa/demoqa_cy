@@ -14,11 +14,13 @@ export class StorePage {
 	runSearch(criteria){
 		this.searchBox.type(criteria)
 		cy.get('.rt-td').should('contain', criteria);
+				//mover validacion a la prueba
 	}
 
 	runInexistingSearch(criteria){
 		this.searchBox.type(criteria)		
 		cy.get('.rt-noData').should('contain', 'No rows found');
+		//mover validacion a la prueba
 	}
 
 	navigateToLogin(){
