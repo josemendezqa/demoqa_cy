@@ -12,19 +12,21 @@ describe('Search Test Suite', () => {
 	beforeEach(() => {
 		cy.clearAllCookies()
 		cy.clearLocalStorage()
-		// Usa la URL desde el archivo de configuración
 		cy.visit(`${environmentConfig.url}/books`)
 	})
 
 	it('should search by book title', () => {		
         storePage.runSearch(bookData.title)
+		storePage.assertSearchResult(bookData.title)
 	})
 
 	it('should search by author name', () => {		
         storePage.runSearch(bookData.author)
+		storePage.assertSearchResult(bookData.author)
 	})
 
 	it('should show no results message for a nonexistent search term', () => {
-        storePage.runInexistingSearch("Inexistent")
+        storePage.runSearch("Inexistent")
+		storePage.assertSearchResult("No rows found")
     });	
 })
