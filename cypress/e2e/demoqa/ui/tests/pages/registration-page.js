@@ -25,12 +25,12 @@ export class RegistrationPage {
 		)	
 	}
 
-	registerNewUser(firstName, lastName, userName, password){
+	registerNewUser({firstName, lastName, userName, password}){
 		this.firstNameInput.type(firstName)
 		this.lastNameInput.type(lastName)
 		this.userNameInput.type(userName)
 		this.passwordInput.type(password)
-		cy.wait(30000)
+		cy.wait(20000)
 		this.registerButton.click()
 	}	
 
