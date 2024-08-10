@@ -1,12 +1,9 @@
 /// <reference types="Cypress" />
 
-//const reqres_baseUrl = 'https://reqres.in/'
-//const demoqa_baseUrl = 'https://demoqa.com'
 const baseUrl = 'https://reqres.in/'
 
 export default class ApiCalls {
 	#sendRequest(requestData) {
-		//aqui meto un if y asigno url a una de las dos de arriba
         const url = `${baseUrl}api/${requestData.endpoint}`
 
 		return cy

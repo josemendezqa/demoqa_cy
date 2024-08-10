@@ -4,5 +4,5 @@ export const RegistrationPageLocators = {
     USERNAME_INPUT: '#userName',
     PASSWORD_INPUT: '#password',
     REGISTER_BUTTON: '#register',
-    PASSWORD_ERROR_LABEL: '#name',
+    ERROR_LABEL: '#name',
 }

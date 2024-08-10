@@ -19,11 +19,20 @@ describe('Users API Test Suite', () => {
     
             validator.http201Validations(createUserResponse);
     
-            const isValidSchema = validateSchema(createUserSchema, createUserResponse.body);
+            const isValidSchema = validateSchema(createUserSchema, createUserResponse.body)
             expect(isValidSchema, "Schema validation failed").to.be.true;    
 
+        })
+    })
+
+    it('Should Reject User Creation with Invalid Data', () => {
+        const invalidRequestBody = {}     
+        usersApiHelper.createUser(invalidRequestBody).then((createUserResponse) => {
+            console.log(createUserResponse);
+    
+            validator.http400Validations(createUserResponse);
         });
-    });
+    })
     
     it('Should retrieve users', () => {
         usersApiHelper.getUsers().then((getUsersResponse) => {
@@ -37,7 +46,7 @@ describe('Users API Test Suite', () => {
             expect(getUsersResponse.body.data).to.be.an('array');
             expect(getUsersResponse.body.data.length).to.be.greaterThan(0);
         });
-    });
+    })
 
     it('Should create a new user and retrieve users', () => {
         usersApiHelper.createUser().then((createUserResponse) => {
@@ -71,5 +80,5 @@ describe('Users API Test Suite', () => {
                 }
             });
         });
-    });
+    })
 })

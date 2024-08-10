@@ -8,6 +8,6 @@ export class ProfilePage {
 	}
 
 	isUserNameValueCorrect(username){
-		return this.userNameValue.containsText('jm')		
+		this.userNameValueLabel.containsText(username)		
 	}
 }

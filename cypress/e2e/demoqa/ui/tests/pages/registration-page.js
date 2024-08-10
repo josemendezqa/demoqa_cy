@@ -21,7 +21,7 @@ export class RegistrationPage {
 			RegistrationPageLocators.REGISTER_BUTTON
 		)
 		this.passwordErrorLabel = new LabelComponent(
-			RegistrationPageLocators.PASSWORD_ERROR_LABEL
+			RegistrationPageLocators.ERROR_LABEL
 		)	
 	}
 
@@ -30,12 +30,18 @@ export class RegistrationPage {
 		this.lastNameInput.type(lastName)
 		this.userNameInput.type(userName)
 		this.passwordInput.type(password)
-		cy.wait(20000)
+		cy.wait(10000)
 		this.registerButton.click()
 	}	
 
-	validateIncorrectRegistrationData(){
+	validateIncorrectRegistrationData(expectedErrorMessage){
 		this.passwordErrorLabel.containsText(
-			"Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer.")		
+			expectedErrorMessage)		
+	}
+
+	validateRegistrationAlert(){
+		cy.on('window:alert', (text) => {
+			expect(text).to.contains('User Register Successfully.')
+		});
 	}
 }

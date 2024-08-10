@@ -3,7 +3,6 @@
 import { StorePage } from "../pages/store-page"
 import bookData from "../../../../../fixtures/ui/books/booksData.json"
 
-// Cargar la configuración del entorno
 const environmentConfig = require('../../../../../../config/environment-handler').getEnv(Cypress.env('envSelected'));
 
 const storePage = new StorePage()
@@ -17,16 +16,16 @@ describe('Search Test Suite', () => {
 
 	it('should search by book title', () => {		
         storePage.runSearch(bookData.title)
-		storePage.assertSearchResult(bookData.title)
+		storePage.validateSearchResult(bookData.title)
 	})
 
 	it('should search by author name', () => {		
         storePage.runSearch(bookData.author)
-		storePage.assertSearchResult(bookData.author)
+		storePage.validateSearchResult(bookData.author)
 	})
 
 	it('should show no results message for a nonexistent search term', () => {
         storePage.runSearch("Inexistent")
-		storePage.assertSearchResult("No rows found")
+		storePage.validateSearchResult("No rows found")
     });	
 })

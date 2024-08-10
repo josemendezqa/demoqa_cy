@@ -18,7 +18,8 @@ export class StorePage {
 			StorePageLocators.NO_ROWS_FOUND_LABEL
 		)
 	}
-	assertSearchResult(expectedResult){
+
+	validateSearchResult(expectedResult){
 		if (expectedResult === 'No rows found') {
 			this.noRowsFoundLabel.containsText(expectedResult);
 		} else {

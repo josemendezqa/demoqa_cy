@@ -31,7 +31,7 @@ export class LoginPage {
 		this.newUserButton.click()
 	}
 
-	invalidCredentialsMessageIsDisplayed(){
+	validateErrorMessageIsDisplayed(expectedErrorMessage){
 		this.invalidCredentialsLabel.isDisplayed()
 	}
 	
