@@ -1,4 +1,4 @@
-import { LabelComponent } from "../../components/label-component";
+import { LabelComponent } from "../../components/label-component"   
 import { ProfilePageLocators } from "./locators/profile-page-locators"
 
 export class ProfilePage {

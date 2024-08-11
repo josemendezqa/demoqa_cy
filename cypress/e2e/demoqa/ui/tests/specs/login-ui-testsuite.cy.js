@@ -27,7 +27,7 @@ describe('Login Test Suite', () => {
             cy.wrap(response.body).as('userData')
         })    
         cy.get('@userData').then((userData) => {    
-            storePage.navigateToLogin();
+            storePage.navigateToLogin()   
             loginPage.login(userData.userName, userData.password)
             profilePage.isUserNameValueCorrect(userData.userName)
         })

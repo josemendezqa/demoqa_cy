@@ -3,7 +3,7 @@
 import { StorePage } from "../pages/store-page"
 import bookData from "../../../../../fixtures/ui/books/booksData.json"
 
-const environmentConfig = require('../../../../../../config/environment-handler').getEnv(Cypress.env('envSelected'));
+const environmentConfig = require('../../../../../../config/environment-handler').getEnv(Cypress.env('envSelected'))   
 
 const storePage = new StorePage()
 
