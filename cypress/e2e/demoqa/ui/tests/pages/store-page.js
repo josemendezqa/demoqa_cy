@@ -1,7 +1,7 @@
-import { ButtonComponent } from "../../components/button-component";
-import { InputComponent } from "../../components/input-component";
-import { LabelComponent } from "../../components/label-component";
-import { StorePageLocators } from "./locators/store-page-locators";
+import { ButtonComponent } from "../../components/button-component"
+import { InputComponent } from "../../components/input-component"
+import { LabelComponent } from "../../components/label-component"
+import { StorePageLocators } from "./locators/store-page-locators"
 
 
 export class StorePage {
@@ -21,9 +21,9 @@ export class StorePage {
 
 	validateSearchResult(expectedResult){
 		if (expectedResult === 'No rows found') {
-			this.noRowsFoundLabel.containsText(expectedResult);
+			this.noRowsFoundLabel.containsText(expectedResult)
 		} else {
-			this.resultsTable.containsText(expectedResult);
+			this.resultsTable.containsText(expectedResult)
 		}
 	}
 

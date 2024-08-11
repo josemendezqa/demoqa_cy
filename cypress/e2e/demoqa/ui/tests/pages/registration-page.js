@@ -1,7 +1,7 @@
-import { ButtonComponent } from "../../components/button-component";
-import { InputComponent } from "../../components/input-component";
-import { LabelComponent } from "../../components/label-component";
-import { RegistrationPageLocators } from "./locators/registration-page-locators";
+import { ButtonComponent } from "../../components/button-component"
+import { InputComponent } from "../../components/input-component"
+import { LabelComponent } from "../../components/label-component"
+import { RegistrationPageLocators } from "./locators/registration-page-locators"
 
 export class RegistrationPage {
 	constructor() {

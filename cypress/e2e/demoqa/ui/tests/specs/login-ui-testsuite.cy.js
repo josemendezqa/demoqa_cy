@@ -5,8 +5,7 @@ import { ProfilePage } from "../pages/profile-page"
 import userData from '../../../../../fixtures/ui/users/userData.json'
 import { UsersApiHelper } from "../../../api/helpers/users-api-helpers"
 
-// Cargar la configuración del entorno
-const environmentConfig = require('../../../../../../config/environment-handler').getEnv(Cypress.env('envSelected'));
+const environmentConfig = require('../../../../../../config/environment-handler').getEnv(Cypress.env('envSelected'))
 
 const storePage = new StorePage()
 const loginPage = new LoginPage()
@@ -37,6 +36,13 @@ describe('Login Test Suite', () => {
     it('should display error when invalid credentials are entered', () => {   
         storePage.navigateToLogin()
         loginPage.login(userData.userName, "wrongPassword!")
-        loginPage.validateErrorMessageIsDisplayed()
+        loginPage.validateErrorMessageIsDisplayed("Invalid username or password!")
     })	
+
+    it('should prevent login when username and password fields are empty', () => {   
+        storePage.navigateToLogin()
+        loginPage.loginButton.click()
+        loginPage.validateErrorHighlightOnEmptyFields()
+    })	
+
 })

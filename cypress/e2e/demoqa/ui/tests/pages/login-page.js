@@ -1,7 +1,7 @@
-import { ButtonComponent } from "../../components/button-component";
-import { InputComponent } from "../../components/input-component";
-import { LabelComponent } from "../../components/label-component";
-import { LoginPageLocators } from "./locators/login-page-locators";
+import { ButtonComponent } from "../../components/button-component"
+import { InputComponent } from "../../components/input-component"
+import { LabelComponent } from "../../components/label-component"
+import { LoginPageLocators } from "./locators/login-page-locators"
 
 export class LoginPage {
 	constructor() {
@@ -16,8 +16,8 @@ export class LoginPage {
 		this.newUserButton = new ButtonComponent(
 			LoginPageLocators.NEW_USER_BUTTON
 		)
-		this.invalidCredentialsLabel = new LabelComponent(
-			LoginPageLocators.INVALID_CREDENTIALS_LABEL
+		this.loginErrorLabel = new LabelComponent(
+			LoginPageLocators.LOGIN_ERROR_LABEL
 		)	
 	}
 
@@ -32,7 +32,14 @@ export class LoginPage {
 	}
 
 	validateErrorMessageIsDisplayed(expectedErrorMessage){
-		this.invalidCredentialsLabel.isDisplayed()
+		this.loginErrorLabel.isDisplayed()
+		this.loginErrorLabel.hasText(expectedErrorMessage)
 	}
 	
+
+	validateErrorHighlightOnEmptyFields(){
+		this.userNameInput.hasAttribute("class", "mr-sm-2 is-invalid form-control")
+		this.passwordInput.hasAttribute("class", "mr-sm-2 is-invalid form-control")
+
+	}
 }

@@ -5,80 +5,60 @@ import { UsersApiHelper } from '../helpers/users-api-helpers'
 import { validateSchema } from '../../../helpers/schemaValidator'
 import getUsersSchema from '../../../../../fixtures/api/users/schemaValidators/get_users_schema.json'
 import createUserSchema from '../../../../../fixtures/api/users/schemaValidators/post_user_schema.json'
-
+import getUserDetailsSchema from '../../../../../fixtures/api/users/schemaValidators/get_user_details_schema.json'
 
 const validator = new StatusCodeValidator()
 const usersApiHelper = new UsersApiHelper()
 
-
 describe('Users API Test Suite', () => {
-    
+
     it('Should create a new user', () => {
         usersApiHelper.createUser().then((createUserResponse) => {
-            console.log(createUserResponse);
-    
-            validator.http201Validations(createUserResponse);
-    
-            const isValidSchema = validateSchema(createUserSchema, createUserResponse.body)
-            expect(isValidSchema, "Schema validation failed").to.be.true;    
+            validator.http201Validations(createUserResponse)
 
+            const isValidSchema = validateSchema(createUserSchema, createUserResponse.body)
+            expect(isValidSchema, "Schema validation failed").to.be.true
         })
     })
 
-    it('Should Reject User Creation with Invalid Data', () => {
-        const invalidRequestBody = {}     
+    // This test fails due to endpoint allowing user creation with invalid data BUG B001
+    it('Should reject user creation with invalid data', () => {
+        const invalidRequestBody = {}
         usersApiHelper.createUser(invalidRequestBody).then((createUserResponse) => {
-            console.log(createUserResponse);
-    
-            validator.http400Validations(createUserResponse);
-        });
-    })
-    
-    it('Should retrieve users', () => {
-        usersApiHelper.getUsers().then((getUsersResponse) => {
-            console.log(getUsersResponse);
-    
-            validator.http200Validations(getUsersResponse);
-    
-            const isValidSchema = validateSchema(getUsersSchema, getUsersResponse.body);
-
-            expect(isValidSchema, "Schema validation failed").to.be.true;
-            expect(getUsersResponse.body.data).to.be.an('array');
-            expect(getUsersResponse.body.data.length).to.be.greaterThan(0);
-        });
+            validator.http400Validations(createUserResponse)
+        })
     })
 
-    it('Should create a new user and retrieve users', () => {
-        usersApiHelper.createUser().then((createUserResponse) => {
-            
-//            validator.http201Validations(createUserResponse);            
+    it('Should retrieve all users', () => {
+        usersApiHelper.createUser().then(() => {
             usersApiHelper.getUsers().then((getUsersResponse) => {
-                validator.http200Validations(getUsersResponse);
+                validator.http200Validations(getUsersResponse)
 
-                expect(getUsersResponse.body.data).to.be.an('array');
+                const isValidSchema = validateSchema(getUsersSchema, getUsersResponse.body)
+                expect(isValidSchema, "Schema validation failed").to.be.true
+            })
+        })
+    })
 
-                if (getUsersResponse.body.data.length > 0) {
-                    getUsersResponse.body.data.forEach(user => {
-                        expect(user).to.be.an('object');
+    // This test fails due to endpoint not allowing to retrieve data of user just created - BUG B002
+    it('Should retrieve details of a specific user', () => {
+        usersApiHelper.createUser().then((createResponse) => {
+            const userId = createResponse.body.id
+            usersApiHelper.getUserById(userId).then((getSpecificUserResponse) => {
+                console.log(getSpecificUserResponse)
+                validator.http200Validations(getSpecificUserResponse)
+                const isValidSchema = validateSchema(getUserDetailsSchema, getSpecificUserResponse.body.data)
+                expect(isValidSchema, "Schema validation failed").to.be.true
+            })
+        })
+    })
 
-                        if (user.hasOwnProperty('id')) {
-                            expect(user.id).to.be.a('number');
-                        }
-                        if (user.hasOwnProperty('email')) {
-                            expect(user.email).to.be.a('string');
-                        }
-                        if (user.hasOwnProperty('first_name')) {
-                            expect(user.first_name).to.be.a('string');
-                        }
-                        if (user.hasOwnProperty('last_name')) {
-                            expect(user.last_name).to.be.a('string');
-                        }
-                        if (user.hasOwnProperty('avatar')) {
-                            expect(user.avatar).to.be.a('string');
-                        }
-                    });
-                }
-            });
-        });
+    it('Should return 404 when trying to retrieve details of a non-existent user ID', () => {
+        usersApiHelper.deleteUser(9999).then(() => {
+            usersApiHelper.getUserById(9999).then((getResponse) => {
+                validator.http404Validations(getResponse)
+                expect(getResponse.status).to.eq(404)
+            })
+        })
     })
 })

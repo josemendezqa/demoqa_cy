@@ -3,5 +3,5 @@ export const LoginPageLocators = {
     PASSWORD_INPUT: '#password',
     LOGIN_BUTTON: '#login',
     NEW_USER_BUTTON: '#newUser',
-    INVALID_CREDENTIALS_LABEL: '#name'  
+    LOGIN_ERROR_LABEL: '#name'  
 }

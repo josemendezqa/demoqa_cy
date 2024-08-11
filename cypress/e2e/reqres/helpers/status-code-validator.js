@@ -16,4 +16,10 @@ export default class StatusCodeValidator {
 		expect(httpResponse.isOkStatusCode).to.eq(false)
 		expect(httpResponse.statusText).to.eq('Bad Request')		
 	}
+
+	http404Validations(httpResponse) {
+		expect(httpResponse.status).to.eq(404)
+		expect(httpResponse.isOkStatusCode).to.eq(false)
+		//expect(httpResponse.statusText).to.eq('Bad Request')		
+	}
 }

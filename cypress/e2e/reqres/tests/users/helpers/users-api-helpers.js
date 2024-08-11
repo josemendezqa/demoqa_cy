@@ -12,4 +12,19 @@ export class UsersApiHelper {
 	getUsers() {
 		return cy.getRequest('users').as('getBoardById')
 	}
+
+    getUserById(userId){
+        return cy.getRequest(`users/${userId}`)
+    }
+
+    deleteUser(userId) {
+        return this.getUserById(userId).then((response) => {
+            if (response.status === 200) {
+                return cy.deleteRequest(`users/${userId}`).as('deleteUser')
+            } else {
+                cy.log(`User with ID ${userId} does not exist and cannot be deleted.`)
+                return null
+            }
+        })
+    }
 }

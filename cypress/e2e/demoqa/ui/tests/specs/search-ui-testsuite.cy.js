@@ -14,18 +14,21 @@ describe('Search Test Suite', () => {
 		cy.visit(`${environmentConfig.url}/books`)
 	})
 
-	it('should search by book title', () => {		
-        storePage.runSearch(bookData.title)
-		storePage.validateSearchResult(bookData.title)
-	})
+	const searchCriteria = [
+		{ type: 'Title', value: bookData.title },
+		{ type: 'Author', value: bookData.author },
+		{ type: 'Publisher', value: bookData.publisher }
+	]
 
-	it('should search by author name', () => {		
-        storePage.runSearch(bookData.author)
-		storePage.validateSearchResult(bookData.author)
+	searchCriteria.forEach((criteria)=>{
+		it(`should search by ${criteria.type}`, () => {		
+			storePage.runSearch(criteria.value)
+			storePage.validateSearchResult(criteria.value)
+		})
 	})
-
+	
 	it('should show no results message for a nonexistent search term', () => {
         storePage.runSearch("Inexistent")
 		storePage.validateSearchResult("No rows found")
-    });	
+    })
 })
