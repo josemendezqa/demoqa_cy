@@ -1,12 +1,12 @@
-import { UsersEndpointsConstants } from "../constants/users-endpoints-constants";
+import { UsersEndpointsConstants } from "../constants/users-endpoints-constants"   
 import createUserRequestBody from '../../../../../fixtures/api/users/requestsBody/user-create-body.json'
 
 export class UsersApiHelper {
     createUser(requestBody = null) {
         if (!requestBody) {
-            requestBody = createUserRequestBody;
+            requestBody = createUserRequestBody   
         }
-        return cy.postRequest(UsersEndpointsConstants.POST_USER, requestBody).as('createUser');
+        return cy.postRequest(UsersEndpointsConstants.POST_USER, requestBody).as('createUser')   
     }
 
 	getUsers() {

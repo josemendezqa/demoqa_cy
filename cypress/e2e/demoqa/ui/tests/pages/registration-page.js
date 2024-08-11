@@ -42,6 +42,6 @@ export class RegistrationPage {
 	validateRegistrationAlert(){
 		cy.on('window:alert', (text) => {
 			expect(text).to.contains('User Register Successfully.')
-		});
+		})   
 	}
 }

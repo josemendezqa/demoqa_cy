@@ -1,14 +1,14 @@
-import Ajv from "ajv";
-import addFormats from "ajv-formats";
+import Ajv from "ajv"   
+import addFormats from "ajv-formats"   
 
-const ajv = new Ajv();
-addFormats(ajv);
+const ajv = new Ajv()   
+addFormats(ajv)   
 
 export function validateSchema(schema, data) {
-    const validate = ajv.compile(schema);
-    const valid = validate(data);
+    const validate = ajv.compile(schema)   
+    const valid = validate(data)   
     if (!valid) {
-        console.error("Schema validation errors:", validate.errors);
+        console.error("Schema validation errors:", validate.errors)   
     }
-    return valid;
+    return valid   
 }
